@@ -19,10 +19,7 @@ dependencies = [
 
 [tool.poetry]
 packages = [
-    { include = "a2c", from = "src"},
-    { include = "gym_minipacman", from = "src"},
-    { include = "scripts", from = "src"},
-    { include = "utils", from = "src"},
+    { include = "rl_experiments" },
 ]
 
 [build-system]
