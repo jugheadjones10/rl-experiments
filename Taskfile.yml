@@ -1,0 +1,68 @@
+version: "3"
+
+vars:
+  # ENV: RegularMiniPacmanNoFrameskip-v0
+  ENV: MiniGrid-DoorKey-5x5-v0
+  # ENV: MiniGrid-DoorKey-6x6-v0
+  # MODEL_NAME: MiniPacman-test
+  MODEL_NAME: DoorKey-experiment
+  FRAMES: 200000
+  FRAMES_PER_PROC: 20
+  SAVE_INTERVAL: 0
+
+tasks:
+  train-simple:
+    desc: Train with simple A2C
+    cmds:
+      - python3 -m scripts.train
+        --algo a2c
+        --env {{.ENV}}
+        --model {{.MODEL_NAME}}
+        --save-interval {{.SAVE_INTERVAL}}
+        --frames-per-proc {{.FRAMES_PER_PROC}}
+        --frames {{.FRAMES}}
+        --early-stop-reward 0.8
+        # --entropy-coef 0.1
+
+  train-recurrent:
+    desc: Train with recurrent A2C
+    cmds:
+      - python3 -m scripts.train
+        --algo a2c
+        --env {{.ENV}}
+        --model {{.MODEL_NAME}}-recurrent
+        --save-interval {{.SAVE_INTERVAL}}
+        --frames-per-proc {{.FRAMES_PER_PROC}}
+        --frames {{.FRAMES}}
+        --recurrence 5
+        --entropy-coef 0.1
+
+  visualize-simple:
+    desc: Visualize results for simple A2C
+    cmds:
+      - python3 -m scripts.visualize
+        --env {{.ENV}}
+        --model {{.MODEL_NAME}}
+
+  visualize-recurrent:
+    desc: Visualize results for recurrent A2C
+    cmds:
+      - python3 -m scripts.visualize
+        --env {{.ENV}}
+        --model {{.MODEL_NAME}}-recurrent
+        --recurrent
+
+  evaluate-simple:
+    desc: Evaluate simple A2C
+    cmds:
+      - python3 -m scripts.evaluate
+        --env {{.ENV}}
+        --model {{.MODEL_NAME}}
+
+  evaluate-recurrent:
+    desc: Evaluate recurrent A2C
+    cmds:
+      - python3 -m scripts.evaluate
+        --env {{.ENV}}
+        --model {{.MODEL_NAME}}-recurrent
+        --memory

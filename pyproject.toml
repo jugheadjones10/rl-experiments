@@ -1,0 +1,30 @@
+[project]
+name = "rl-experiments"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Kim Young Jin",email = "kimyoungjin1001@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gymnasium",
+    "torch",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "ipykernel (>=6.29.5,<7.0.0)",
+]
+
+[tool.poetry]
+packages = [
+    {include = "a2c"},
+    {include="gym_minipacman"},
+    {include="scripts"},
+    {include="utils"}
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
