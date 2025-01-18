@@ -1,6 +1,6 @@
 import torch
-from a2c.model import ACModel
 
+from ..a2c.model import ACModel
 from .format import get_obss_preprocessor
 from .other import device
 from .storage import get_model_state, get_vocab

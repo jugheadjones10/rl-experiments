@@ -2,7 +2,8 @@ import argparse
 import time
 
 import numpy
-from utils import device, utils
+
+from rl_experiments.utils import device, utils
 
 # Parse arguments
 

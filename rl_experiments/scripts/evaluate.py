@@ -2,8 +2,9 @@ import argparse
 import time
 
 import torch
-from a2c.penv import ParallelEnv
-from utils import device, utils
+
+from rl_experiments.a2c.penv import ParallelEnv
+from rl_experiments.utils import device, utils
 
 # Parse arguments
 

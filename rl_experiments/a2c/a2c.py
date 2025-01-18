@@ -1,6 +1,7 @@
 import numpy
 import torch
-from a2c.base import BaseAlgo
+
+from .base import BaseAlgo
 
 
 class A2CAlgo(BaseAlgo):

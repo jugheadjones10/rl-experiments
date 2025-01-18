@@ -1,10 +1,11 @@
 import csv
-import os
-import torch
 import logging
+import os
 import sys
 
-import utils
+import torch
+
+from . import utils
 from .other import device
 
 
@@ -56,8 +57,8 @@ def get_txt_logger(model_dir):
         format="%(message)s",
         handlers=[
             logging.FileHandler(filename=path),
-            logging.StreamHandler(sys.stdout)
-        ]
+            logging.StreamHandler(sys.stdout),
+        ],
     )
 
     return logging.getLogger()

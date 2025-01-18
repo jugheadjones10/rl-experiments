@@ -1,10 +1,11 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from a2c.convlstm import (
+from torch.distributions.categorical import Categorical
+
+from .convlstm import (
     MultiLayerCustomLSTM,  # <- Import our new multi-layer linear LSTM
 )
-from torch.distributions.categorical import Categorical
 
 
 # Function from https://github.com/ikostrikov/pytorch-a2c-ppo-acktr/blob/master/model.py

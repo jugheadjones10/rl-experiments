@@ -5,10 +5,10 @@ import time
 
 import numpy as np  # noqa
 import tensorboardX
-from a2c.a2c import A2CAlgo
-from a2c.model import ACModel  # noqa
-from a2c.model_free_model import ModelFreeACModel  # noqa
-from utils import device, utils
+
+from rl_experiments.a2c.a2c import A2CAlgo
+from rl_experiments.a2c.model_free_model import ModelFreeACModel
+from rl_experiments.utils import device, utils
 
 # Parse arguments
 
