@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 
 import torch
-from a2c.dictlist import DictList
-from a2c.penv import ParallelEnv
+
+from .dictlist import DictList
+from .penv import ParallelEnv
 
 
 def default_preprocess_obss(obss, device=None):
