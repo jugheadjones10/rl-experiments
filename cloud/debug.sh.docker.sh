@@ -1,1 +1,0 @@
-docker run -d --cpuset-cpus="0" -e WANDB_API_KEY=31a3c3c489081fd309d3b47cad906b9d539f8ba2 juggy69/cleanrl-new-nvidia:latest /bin/bash -c "poetry run python cleanrl/dqn_atari.py --env-id QbertNoFrameskip-v4 --track --total-timesteps 10000000 --seed 1"
