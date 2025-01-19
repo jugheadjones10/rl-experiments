@@ -5,7 +5,7 @@ import sys
 
 import torch
 
-from . import utils
+from .. import utils
 from .other import device
 
 

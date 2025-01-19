@@ -3,7 +3,8 @@ import re
 import gymnasium as gym
 import numpy
 import torch
-from a2c.dictlist import DictList  # noqa
+
+from ..a2c.dictlist import DictList  # noqa
 
 
 def get_obss_preprocessor(obs_space):

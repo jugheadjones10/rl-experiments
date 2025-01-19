@@ -1,0 +1,1 @@
+docker run -d --cpuset-cpus="0" -e WANDB_API_KEY=31a3c3c489081fd309d3b47cad906b9d539f8ba2 juggy69/rl-experiments:latest /bin/bash -c "poetry run python rl_experiments/scripts/train.py     --algo a2c     --env MiniGrid-DoorKey-6x6-v0     --model DoorKey-experiment     --frames 1000000     --frames-per-proc 20     --save-interval 0     --early-stop-reward 0.8 --seed 1"

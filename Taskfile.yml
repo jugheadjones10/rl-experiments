@@ -2,11 +2,11 @@ version: "3"
 
 vars:
   # ENV: RegularMiniPacmanNoFrameskip-v0
-  ENV: MiniGrid-DoorKey-5x5-v0
-  # ENV: MiniGrid-DoorKey-6x6-v0
+  # ENV: MiniGrid-DoorKey-5x5-v0
+  ENV: MiniGrid-DoorKey-6x6-v0
   # MODEL_NAME: MiniPacman-test
   MODEL_NAME: DoorKey-experiment
-  FRAMES: 200000
+  FRAMES: 1000000
   FRAMES_PER_PROC: 20
   SAVE_INTERVAL: 0
 
@@ -14,7 +14,7 @@ tasks:
   train-simple:
     desc: Train with simple A2C
     cmds:
-      - python3 -m scripts.train
+      - python3 rl_experiments/scripts/train.py
         --algo a2c
         --env {{.ENV}}
         --model {{.MODEL_NAME}}
@@ -66,3 +66,46 @@ tasks:
         --env {{.ENV}}
         --model {{.MODEL_NAME}}-recurrent
         --memory
+
+  build-docker:
+    desc: Build the docker image
+    cmds:
+      - docker build -t juggy69/rl-experiments:latest .
+
+  run-docker:
+    desc: Run the docker image
+    cmds:
+      - docker run -it juggy69/rl-experiments:latest
+
+  submit-local-exp:
+    desc: Generate command for running a local experiment
+    cmds:
+      - poetry run python rl_experiments/scripts/submit_exp.py
+        --command "poetry run python rl_experiments/scripts/train.py --algo a2c --env {{.ENV}} --model {{.MODEL_NAME}}"
+        --docker-tag juggy69/rl-experiments:latest
+
+  submit-exp:
+    desc: Submit an experiment to AWS
+    cmds:
+      - |
+        poetry run python rl_experiments/scripts/submit_exp.py \
+          --command "poetry run python rl_experiments/scripts/train.py \
+            --algo a2c \
+            --env {{.ENV}} \
+            --model {{.MODEL_NAME}} \
+            --frames {{.FRAMES}} \
+            --frames-per-proc {{.FRAMES_PER_PROC}} \
+            --save-interval {{.SAVE_INTERVAL}} \
+            --early-stop-reward 0.8" \
+          --docker-tag juggy69/rl-experiments:latest \
+          --job-queue g4dn-4xlarge \
+          --num-vcpu 16 \
+          --num-memory 50000 \
+          --provider aws
+      # - poetry run python rl_experiments/scripts/submit_exp.py
+      #   --command "poetry run python rl_experiments/scripts/train.py --algo a2c --env {{.ENV}} --model {{.MODEL_NAME}} --frames {{.FRAMES}} --frames-per-proc {{.FRAMES_PER_PROC}} --save-interval {{.SAVE_INTERVAL}}"
+      #   --docker-tag rl-experiments:latest
+      #   --job-queue gd4n-4xlarge
+      #   --num-vcpu 16
+      #   --num-memory 50000
+      #   --provider aws

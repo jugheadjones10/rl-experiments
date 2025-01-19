@@ -2,7 +2,7 @@
 
 import gymnasium as gym
 import minigrid  # noqa
-import gym_minipacman  # noqa
+from .. import gym_minipacman  # noqa
 
 
 def make_env(env_key, seed=None, render_mode=None):
